@@ -2,7 +2,6 @@ import 'package:cupertino_ui/cupertino_ui.dart' as cupertino;
 import 'package:material_ui/material_ui.dart';
 
 import '../../data/models.dart';
-import '../../design/adaptive/adaptive_icon_button.dart';
 import '../../design/adaptive/adaptive_scaffold.dart';
 import '../../design/app_settings.dart';
 import '../../design/debug/design_mode_badge.dart';
@@ -75,12 +74,6 @@ class _ShellScreenState extends State<ShellScreen> {
       onTabSelected: (index) => setState(() => _index = index),
       actions: [
         DesignModeBadge(onOpenGallery: _openGallery),
-        AdaptiveIconButton(
-          icon: Icons.notifications_none_rounded,
-          tooltip: 'Notifications',
-          badgeCount: 3,
-          onPressed: () => setState(() => _index = 3),
-        ),
       ],
       body: IndexedStack(
         index: _index,
