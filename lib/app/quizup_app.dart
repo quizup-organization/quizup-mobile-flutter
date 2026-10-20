@@ -1,68 +1,89 @@
+import 'package:cupertino_ui/cupertino_ui.dart' as cupertino;
 import 'package:material_ui/material_ui.dart';
 
 import '../data/models.dart';
-import '../design/app_settings.dart';
-import '../design/theme.dart';
-import '../features/shell/shell_screen.dart';
+import '../native/android/android_shell.dart';
+import '../native/ios/ios_shell.dart';
+import '../native/native_settings.dart';
 
 class QuizupApp extends StatefulWidget {
   const QuizupApp({
     super.key,
     required this.fixtures,
-    this.initialDesignMode = DesignMode.quizup,
-    this.initialPlatform = PlatformOverride.auto,
-    this.initialThemeMode = ThemeMode.dark,
+    this.initialPlatform = NativePlatform.android,
+    this.initialBrightness = Brightness.light,
   });
 
   final QuizupFixtures fixtures;
-  final DesignMode initialDesignMode;
-  final PlatformOverride initialPlatform;
-  final ThemeMode initialThemeMode;
+  final NativePlatform initialPlatform;
+  final Brightness initialBrightness;
 
   @override
   State<QuizupApp> createState() => _QuizupAppState();
 }
 
 class _QuizupAppState extends State<QuizupApp> {
-  late final AppSettingsController _settings;
+  late NativePlatform _platform;
+  late Brightness _brightness;
 
   @override
   void initState() {
     super.initState();
-    _settings = AppSettingsController(
-      designMode: widget.initialDesignMode,
-      platformOverride: widget.initialPlatform,
-      themeMode: widget.initialThemeMode,
-    );
+    _platform = widget.initialPlatform;
+    _brightness = widget.initialBrightness;
   }
 
-  @override
-  void dispose() {
-    _settings.dispose();
-    super.dispose();
+  void _setPlatform(NativePlatform platform) {
+    if (_platform == platform) {
+      return;
+    }
+    setState(() => _platform = platform);
+  }
+
+  void _setBrightness(Brightness brightness) {
+    if (_brightness == brightness) {
+      return;
+    }
+    setState(() => _brightness = brightness);
   }
 
   @override
   Widget build(BuildContext context) {
-    return AppSettingsScope(
-      controller: _settings,
-      child: AnimatedBuilder(
-        animation: _settings,
-        builder: (context, _) {
-          final platform = _settings.resolvedPlatform;
-          return MaterialApp(
-            title: 'QuizUp Flutter',
-            debugShowCheckedModeBanner: false,
-            theme: buildQuizupTheme(Brightness.light, platform),
-            darkTheme: buildQuizupTheme(Brightness.dark, platform),
-            themeMode: _settings.themeMode,
-            locale: const Locale('fr'),
-            supportedLocales: const [Locale('fr'), Locale('en')],
-            localizationsDelegates: GlobalMaterialLocalizations.delegates,
-            home: ShellScreen(fixtures: widget.fixtures),
-          );
-        },
-      ),
+    final settings = NativeSettings(
+      platform: _platform,
+      brightness: _brightness,
+      onPlatformChanged: _setPlatform,
+      onBrightnessChanged: _setBrightness,
+    );
+
+    return NativeSettingsScope(
+      settings: settings,
+      child: _platform == NativePlatform.ios
+          ? cupertino.CupertinoApp(
+              title: 'QuizUp Native',
+              theme: cupertino.CupertinoThemeData(brightness: _brightness),
+              localizationsDelegates:
+                  cupertino.GlobalCupertinoLocalizations.delegates,
+              supportedLocales: const [Locale('fr'), Locale('en')],
+              home: IosShell(fixtures: widget.fixtures),
+            )
+          : MaterialApp(
+              title: 'QuizUp Native',
+              theme: ThemeData(
+                useMaterial3: true,
+                brightness: Brightness.light,
+              ),
+              darkTheme: ThemeData(
+                useMaterial3: true,
+                brightness: Brightness.dark,
+              ),
+              themeMode: _brightness == Brightness.dark
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              localizationsDelegates: GlobalMaterialLocalizations.delegates,
+              supportedLocales: const [Locale('fr'), Locale('en')],
+              home: AndroidShell(fixtures: widget.fixtures),
+            ),
     );
   }
 }

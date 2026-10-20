@@ -1,42 +1,51 @@
+import 'package:cupertino_ui/cupertino_ui.dart' as cupertino;
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:quizup/app/quizup_app.dart';
 import 'package:quizup/data/fixture_repository.dart';
 import 'package:quizup/data/models.dart';
-import 'package:quizup/design/app_settings.dart';
+import 'package:quizup/native/native_settings.dart';
 
 class _Variant {
-  const _Variant(this.name, this.designMode, this.platform, this.themeMode);
+  const _Variant(this.name, this.platform, this.brightness);
 
   final String name;
-  final DesignMode designMode;
-  final PlatformOverride platform;
-  final ThemeMode themeMode;
+  final NativePlatform platform;
+  final Brightness brightness;
 }
 
 const _variants = [
-  _Variant('quizup_dark', DesignMode.quizup, PlatformOverride.auto, ThemeMode.dark),
-  _Variant('quizup_light', DesignMode.quizup, PlatformOverride.auto, ThemeMode.light),
-  _Variant('native_ios_dark', DesignMode.platform, PlatformOverride.ios, ThemeMode.dark),
-  _Variant('native_ios_light', DesignMode.platform, PlatformOverride.ios, ThemeMode.light),
-  _Variant(
-    'native_android_dark',
-    DesignMode.platform,
-    PlatformOverride.android,
-    ThemeMode.dark,
-  ),
-  _Variant(
-    'native_android_light',
-    DesignMode.platform,
-    PlatformOverride.android,
-    ThemeMode.light,
-  ),
+  _Variant('ios_light', NativePlatform.ios, Brightness.light),
+  _Variant('ios_dark', NativePlatform.ios, Brightness.dark),
+  _Variant('android_light', NativePlatform.android, Brightness.light),
+  _Variant('android_dark', NativePlatform.android, Brightness.dark),
 ];
 
-Future<QuizupFixtures> _loadFixtures() => FixtureRepository.load();
+Future<void> _loadFonts() async {
+  const fontPaths = [
+    'assets/fonts/Inter_400Regular.ttf',
+    'assets/fonts/Inter_500Medium.ttf',
+    'assets/fonts/Inter_600SemiBold.ttf',
+    'assets/fonts/Inter_700Bold.ttf',
+    'assets/fonts/Inter_800ExtraBold.ttf',
+  ];
+  // Register a realistic fallback under the platform family names used by
+  // Cupertino and Material. Linux runners do not have SF Pro or Roboto.
+  for (final family in const ['Inter', '.SF Pro Text', 'Roboto']) {
+    final loader = FontLoader(family);
+    for (final path in fontPaths) {
+      loader.addFont(rootBundle.load(path));
+    }
+    await loader.load();
+  }
+}
 
-Future<void> _pumpApp(WidgetTester tester, QuizupFixtures fixtures, _Variant variant) async {
+Future<void> _pumpApp(
+  WidgetTester tester,
+  QuizupFixtures fixtures,
+  _Variant variant,
+) async {
   tester.view.physicalSize = const Size(390, 844);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.resetPhysicalSize);
@@ -47,9 +56,8 @@ Future<void> _pumpApp(WidgetTester tester, QuizupFixtures fixtures, _Variant var
       key: const ValueKey('golden-root'),
       child: QuizupApp(
         fixtures: fixtures,
-        initialDesignMode: variant.designMode,
         initialPlatform: variant.platform,
-        initialThemeMode: variant.themeMode,
+        initialBrightness: variant.brightness,
       ),
     ),
   );
@@ -63,13 +71,19 @@ Future<void> _capture(WidgetTester tester, String name) async {
   );
 }
 
-Future<void> _goToTopics(WidgetTester tester) async {
-  final brandNav = find.byKey(const ValueKey('nav-item-1'));
-  if (brandNav.evaluate().isNotEmpty) {
-    await tester.tap(brandNav);
+Future<void> _goToTopics(WidgetTester tester, _Variant variant) async {
+  if (variant.platform == NativePlatform.ios) {
+    await tester.tap(
+      find.byIcon(cupertino.CupertinoIcons.square_grid_2x2).last,
+    );
   } else {
-    await tester.tap(find.text('Sujets').last);
+    await tester.tap(find.byIcon(Icons.grid_view_outlined).last);
   }
+  await tester.pumpAndSettle();
+}
+
+Future<void> _openTopic(WidgetTester tester) async {
+  await tester.tap(find.byKey(const ValueKey('trending-arts')));
   await tester.pumpAndSettle();
 }
 
@@ -79,24 +93,8 @@ void main() {
   late QuizupFixtures fixtures;
 
   setUpAll(() async {
-    const fontPaths = [
-      'assets/fonts/Inter_400Regular.ttf',
-      'assets/fonts/Inter_500Medium.ttf',
-      'assets/fonts/Inter_600SemiBold.ttf',
-      'assets/fonts/Inter_700Bold.ttf',
-      'assets/fonts/Inter_800ExtraBold.ttf',
-    ];
-    // The native mode asks for the platform font families. Registering Inter
-    // under those names keeps the golden metrics realistic on Linux runners,
-    // where SF Pro and Roboto are not installed.
-    for (final family in const ['Inter', '.SF Pro Text', 'Roboto']) {
-      final fontLoader = FontLoader(family);
-      for (final path in fontPaths) {
-        fontLoader.addFont(rootBundle.load(path));
-      }
-      await fontLoader.load();
-    }
-    fixtures = await _loadFixtures();
+    await _loadFonts();
+    fixtures = await FixtureRepository.load();
   });
 
   for (final variant in _variants) {
@@ -107,21 +105,19 @@ void main() {
 
     testWidgets('${variant.name} — Sujets', (tester) async {
       await _pumpApp(tester, fixtures, variant);
-      await _goToTopics(tester);
+      await _goToTopics(tester, variant);
       await _capture(tester, '${variant.name}_topics');
     });
 
     testWidgets('${variant.name} — Fiche sujet', (tester) async {
       await _pumpApp(tester, fixtures, variant);
-      await tester.tap(find.byKey(const ValueKey('home-topic-arts')));
-      await tester.pumpAndSettle();
+      await _openTopic(tester);
       await _capture(tester, '${variant.name}_topic');
     });
 
     testWidgets('${variant.name} — Duel', (tester) async {
       await _pumpApp(tester, fixtures, variant);
-      await tester.tap(find.byKey(const ValueKey('home-topic-arts')));
-      await tester.pumpAndSettle();
+      await _openTopic(tester);
       await tester.tap(find.byKey(const ValueKey('start-duel')));
       await tester.pumpAndSettle();
       await _capture(tester, '${variant.name}_duel');

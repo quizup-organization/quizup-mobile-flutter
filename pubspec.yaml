@@ -1,5 +1,5 @@
 name: quizup
-description: "PoC visuel Flutter de QuizUp (rendu web compact, mode QuizUp et mode natif)."
+description: "PoC Flutter natif : Cupertino sur iOS, Material 3 sur Android, sans design system custom."
 publish_to: 'none'
 version: 0.1.0+1
 
