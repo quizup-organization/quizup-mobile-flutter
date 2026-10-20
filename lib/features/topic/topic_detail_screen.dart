@@ -47,7 +47,7 @@ class _TopicDetailScreenState extends State<TopicDetailScreen> {
     final topic = widget.overview.topic;
 
     return AdaptiveScaffold(
-      title: topic.name,
+      title: 'Sujet',
       subtitle: topic.category,
       showBack: true,
       showNav: false,
