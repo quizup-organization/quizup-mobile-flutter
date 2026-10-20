@@ -81,7 +81,7 @@ class AdaptiveIconButton extends StatelessWidget {
       return cupertino.CupertinoButton(
         onPressed: onPressed,
         padding: EdgeInsets.zero,
-        minSize: const Size(40, 40),
+        minimumSize: const Size(40, 40),
         child: content,
       );
     }

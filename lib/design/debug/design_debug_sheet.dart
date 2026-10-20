@@ -4,6 +4,7 @@ import '../adaptive/adaptive_button.dart';
 import '../adaptive/adaptive_segmented_control.dart';
 import '../adaptive/adaptive_sheet.dart';
 import '../app_settings.dart';
+import '../components/quizup_button.dart';
 import '../components/quizup_text.dart';
 import '../components/segmented_control.dart';
 import '../tokens.dart';

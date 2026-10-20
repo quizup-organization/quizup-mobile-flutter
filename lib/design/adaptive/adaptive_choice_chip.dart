@@ -41,7 +41,7 @@ class AdaptiveChoiceChip extends StatelessWidget {
       return cupertino.CupertinoButton(
         onPressed: onTap,
         padding: EdgeInsets.zero,
-        minSize: const Size(0, 36),
+        minimumSize: const Size(0, 36),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(

@@ -128,7 +128,7 @@ class AdaptiveButton extends StatelessWidget {
                 ? null
                 : style.background,
             borderRadius: BorderRadius.circular(tokens.radii.button),
-            minSize: Size(0, _height),
+            minimumSize: Size(0, _height),
             padding: const EdgeInsets.symmetric(horizontal: 16),
             pressedOpacity: 0.7,
             child: child,

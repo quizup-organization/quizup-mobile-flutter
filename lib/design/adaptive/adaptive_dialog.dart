@@ -6,7 +6,6 @@ import '../components/quizup_button.dart';
 import '../components/quizup_card.dart';
 import '../components/quizup_text.dart';
 import '../tokens.dart';
-import 'adaptive_button.dart';
 import 'native_style.dart';
 
 Future<bool> showAdaptiveConfirmDialog(

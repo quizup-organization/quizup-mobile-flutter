@@ -184,7 +184,6 @@ class _TopicHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tokens = QuizupTheme.of(context);
     return SizedBox(
       height: 196,
       child: ClipRRect(

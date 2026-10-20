@@ -4,14 +4,14 @@ import '../tokens.dart';
 import 'pressable_scale.dart';
 import 'quizup_text.dart';
 
-class QuizupSegment<T> {
+class QuizupSegment<T extends Object> {
   const QuizupSegment({required this.value, required this.label});
 
   final T value;
   final String label;
 }
 
-class QuizupSegmentedControl<T> extends StatelessWidget {
+class QuizupSegmentedControl<T extends Object> extends StatelessWidget {
   const QuizupSegmentedControl({
     super.key,
     required this.segments,

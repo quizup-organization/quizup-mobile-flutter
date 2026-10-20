@@ -146,7 +146,7 @@ class _AdaptiveScaffoldState extends State<AdaptiveScaffold> {
         leading: widget.showBack
             ? cupertino.CupertinoButton(
                 padding: EdgeInsets.zero,
-                minSize: const Size(40, 40),
+                minimumSize: const Size(40, 40),
                 onPressed: widget.onBack ??
                     () => Navigator.of(context).maybePop(),
                 child: Icon(

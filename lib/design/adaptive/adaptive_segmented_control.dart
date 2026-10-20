@@ -6,7 +6,7 @@ import '../components/segmented_control.dart';
 import '../tokens.dart';
 import 'native_style.dart';
 
-class AdaptiveSegmentedControl<T> extends StatelessWidget {
+class AdaptiveSegmentedControl<T extends Object> extends StatelessWidget {
   const AdaptiveSegmentedControl({
     super.key,
     required this.segments,
