@@ -2,7 +2,6 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../data/models.dart';
 import '../../design/adaptive/adaptive_button.dart';
-import '../../design/adaptive/adaptive_icon_button.dart';
 import '../../design/adaptive/adaptive_scaffold.dart';
 import '../../design/adaptive/adaptive_segmented_control.dart';
 import '../../design/components/leaderboard_row.dart';
@@ -52,20 +51,6 @@ class _TopicDetailScreenState extends State<TopicDetailScreen> {
       subtitle: topic.category,
       showBack: true,
       showNav: false,
-      actions: [
-        AdaptiveIconButton(
-          icon: Icons.ios_share_rounded,
-          tooltip: 'Partager',
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Lien du sujet copié.'),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          },
-        ),
-      ],
       body: ListView(
         padding: const EdgeInsets.fromLTRB(14, 14, 14, 28),
         children: [
