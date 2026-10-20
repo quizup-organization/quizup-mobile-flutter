@@ -245,9 +245,6 @@ class _TopicHeader extends StatelessWidget {
                     variant: following
                         ? QuizupButtonVariant.outline
                         : QuizupButtonVariant.primary,
-                    icon: following
-                        ? Icons.check_rounded
-                        : Icons.add_rounded,
                     onPressed: onToggleFollow,
                   ),
                 ],
