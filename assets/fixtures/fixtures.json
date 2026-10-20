@@ -1,0 +1,217 @@
+{
+  "topics": [
+    {
+      "id": "arts",
+      "name": "Chefs-d'œuvre de la peinture",
+      "category": "Arts",
+      "image": "assets/images/starry_night.jpg",
+      "banner": "assets/images/starry_night.jpg",
+      "color": "#1447E6",
+      "description": "Les tableaux qui ont marqué l'histoire du regard.",
+      "followers": 12840,
+      "games": 48210,
+      "recentRank": 1
+    },
+    {
+      "id": "nature",
+      "name": "Le règne animal",
+      "category": "Nature",
+      "image": "assets/images/blue_whale.jpg",
+      "banner": "assets/images/blue_whale.jpg",
+      "color": "#00A63E",
+      "description": "Des géants des océans aux plus petits insectes.",
+      "followers": 9820,
+      "games": 36420,
+      "recentRank": 2
+    },
+    {
+      "id": "music",
+      "name": "Rock & pop",
+      "category": "Musique",
+      "image": "assets/images/acdc.jpg",
+      "banner": "assets/images/acdc.jpg",
+      "color": "#E7000B",
+      "description": "Riffs, refrains et légendes de la scène.",
+      "followers": 15420,
+      "games": 51280,
+      "recentRank": 3
+    },
+    {
+      "id": "history",
+      "name": "Histoire de France",
+      "category": "Histoire",
+      "image": "assets/images/joan_of_arc.jpg",
+      "banner": "assets/images/joan_of_arc.jpg",
+      "color": "#F59E0B",
+      "description": "Des Gaulois à la Ve République.",
+      "followers": 11240,
+      "games": 42890,
+      "recentRank": 4
+    },
+    {
+      "id": "science",
+      "name": "Espace & astronomie",
+      "category": "Science",
+      "image": "assets/images/jupiter.jpg",
+      "banner": "assets/images/jupiter.jpg",
+      "color": "#6366F1",
+      "description": "Planètes, étoiles et mystères du cosmos.",
+      "followers": 8760,
+      "games": 30150,
+      "recentRank": 5
+    },
+    {
+      "id": "cinema",
+      "name": "Cinéma de légende",
+      "category": "Cinéma",
+      "image": "assets/images/aston_martin.jpg",
+      "banner": "assets/images/aston_martin.jpg",
+      "color": "#8B5CF6",
+      "description": "Répliques cultes et scènes inoubliables.",
+      "followers": 10480,
+      "games": 38970,
+      "recentRank": 6
+    },
+    {
+      "id": "sport",
+      "name": "Formule 1",
+      "category": "Sport",
+      "image": "assets/images/formula_one.jpg",
+      "banner": "assets/images/formula_one.jpg",
+      "color": "#EF4444",
+      "description": "Écuries, circuits et champions du volant.",
+      "followers": 7420,
+      "games": 28460,
+      "recentRank": 7
+    },
+    {
+      "id": "games",
+      "name": "Jeux vidéo",
+      "category": "Jeux vidéo",
+      "image": "assets/images/pacman.png",
+      "banner": "assets/images/pacman.png",
+      "color": "#F59E0B",
+      "description": "De Pong aux open worlds.",
+      "followers": 13680,
+      "games": 46720,
+      "recentRank": 8
+    },
+    {
+      "id": "food",
+      "name": "Gastronomie du monde",
+      "category": "Gastronomie",
+      "image": "assets/images/pizza.jpg",
+      "banner": "assets/images/pizza.jpg",
+      "color": "#EF4444",
+      "description": "Saveurs, recettes et spécialités régionales.",
+      "followers": 8940,
+      "games": 27640,
+      "recentRank": 9
+    },
+    {
+      "id": "portraits",
+      "name": "Portraits de légende",
+      "category": "Arts",
+      "image": "assets/images/mona_lisa.jpg",
+      "banner": "assets/images/mona_lisa.jpg",
+      "color": "#1447E6",
+      "description": "Les visages qui nous regardent encore.",
+      "followers": 6980,
+      "games": 21430,
+      "recentRank": 10
+    },
+    {
+      "id": "oceans",
+      "name": "Océans & merveilles",
+      "category": "Nature",
+      "image": "assets/images/green_turtle.jpg",
+      "banner": "assets/images/green_turtle.jpg",
+      "color": "#00A63E",
+      "description": "Tortues, récifs et profondeurs bleues.",
+      "followers": 6120,
+      "games": 19870,
+      "recentRank": 11
+    },
+    {
+      "id": "art_nouveau",
+      "name": "Art nouveau",
+      "category": "Arts",
+      "image": "assets/images/the_kiss.jpg",
+      "banner": "assets/images/the_kiss.jpg",
+      "color": "#8B5CF6",
+      "description": "Courbes, ornements et modernité.",
+      "followers": 5340,
+      "games": 17220,
+      "recentRank": 12
+    }
+  ],
+  "home": {
+    "trendingIds": [
+      "arts",
+      "nature",
+      "music",
+      "history",
+      "science",
+      "cinema",
+      "sport",
+      "games",
+      "food",
+      "portraits"
+    ],
+    "followedIds": ["arts", "science", "music", "history"],
+    "newIds": ["oceans", "art_nouveau", "games", "food", "cinema", "sport"]
+  },
+  "overview": {
+    "topicId": "arts",
+    "stats": {
+      "followers": 12840,
+      "games": 48210,
+      "myRank": 128
+    },
+    "mastery": {
+      "grade": "Or",
+      "progress": 0.68,
+      "remainingXp": 320,
+      "nextGrade": "Platine"
+    },
+    "leaderboard": [
+      {"rank": 1, "name": "Nova", "level": 42, "xp": 18420, "color": "#1447E6"},
+      {"rank": 2, "name": "Léo", "level": 38, "xp": 16110, "color": "#00A63E"},
+      {"rank": 3, "name": "Maya", "level": 35, "xp": 14980, "color": "#E7000B"},
+      {"rank": 4, "name": "Sacha", "level": 31, "xp": 12840, "color": "#F59E0B"},
+      {"rank": 5, "name": "Inès", "level": 28, "xp": 11720, "color": "#8B5CF6"},
+      {"rank": 6, "name": "Noah", "level": 26, "xp": 10480, "color": "#06B6D4"},
+      {"rank": 7, "name": "Yanis", "level": 24, "xp": 9860, "color": "#EC4899"},
+      {"rank": 8, "name": "Lina", "level": 22, "xp": 9120, "color": "#84CC16"}
+    ]
+  },
+  "duel": {
+    "topicId": "arts",
+    "opponent": {
+      "name": "Nova",
+      "level": 42,
+      "score": 220,
+      "color": "#1447E6"
+    },
+    "questions": [
+      {
+        "text": "Qui a peint La Nuit étoilée ?",
+        "image": "assets/images/starry_night.jpg",
+        "answers": ["Vincent van Gogh", "Claude Monet", "Pablo Picasso", "Gustav Klimt"],
+        "correctIndex": 0
+      },
+      {
+        "text": "Dans quel musée est exposée La Joconde ?",
+        "image": "assets/images/mona_lisa.jpg",
+        "answers": ["Le Prado", "Le Louvre", "Le MoMA", "La National Gallery"],
+        "correctIndex": 1
+      },
+      {
+        "text": "Quel courant artistique est associé à Gustav Klimt ?",
+        "image": "assets/images/the_kiss.jpg",
+        "answers": ["Le Cubisme", "L'Impressionnisme", "L'Art nouveau", "Le Surréalisme"],
+        "correctIndex": 2
+      }
+    ]
+  }
+}
