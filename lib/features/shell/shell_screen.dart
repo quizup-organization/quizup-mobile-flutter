@@ -75,7 +75,6 @@ class _ShellScreenState extends State<ShellScreen> {
       onTabSelected: (index) => setState(() => _index = index),
       actions: [
         DesignModeBadge(onOpenGallery: _openGallery),
-        const SizedBox(width: 4),
         AdaptiveIconButton(
           icon: Icons.notifications_none_rounded,
           tooltip: 'Notifications',
