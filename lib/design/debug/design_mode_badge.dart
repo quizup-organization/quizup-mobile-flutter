@@ -25,7 +25,7 @@ class DesignModeBadge extends StatelessWidget {
       semanticLabel: 'Changer de design system',
       child: Container(
         height: 32,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 6),
         decoration: BoxDecoration(
           color: colors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(999),
@@ -38,13 +38,13 @@ class DesignModeBadge extends StatelessWidget {
           children: [
             Icon(
               Icons.palette_outlined,
-              size: 14,
+              size: 13,
               color: colors.primary,
             ),
-            const SizedBox(width: 3),
+            const SizedBox(width: 2),
             QuizupText(
               settings.designMode.label,
-              size: 10,
+              size: 9,
               weight: FontWeight.w600,
               color: colors.primary,
               maxLines: 1,
