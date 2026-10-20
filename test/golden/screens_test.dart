@@ -79,17 +79,23 @@ void main() {
   late QuizupFixtures fixtures;
 
   setUpAll(() async {
-    final fontLoader = FontLoader('Inter');
-    for (final path in const [
+    const fontPaths = [
       'assets/fonts/Inter_400Regular.ttf',
       'assets/fonts/Inter_500Medium.ttf',
       'assets/fonts/Inter_600SemiBold.ttf',
       'assets/fonts/Inter_700Bold.ttf',
       'assets/fonts/Inter_800ExtraBold.ttf',
-    ]) {
-      fontLoader.addFont(rootBundle.load(path));
+    ];
+    // The native mode asks for the platform font families. Registering Inter
+    // under those names keeps the golden metrics realistic on Linux runners,
+    // where SF Pro and Roboto are not installed.
+    for (final family in const ['Inter', '.SF Pro Text', 'Roboto']) {
+      final fontLoader = FontLoader(family);
+      for (final path in fontPaths) {
+        fontLoader.addFont(rootBundle.load(path));
+      }
+      await fontLoader.load();
     }
-    await fontLoader.load();
     fixtures = await _loadFixtures();
   });
 

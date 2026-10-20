@@ -42,14 +42,14 @@ class AdaptiveSegmentedControl<T extends Object> extends StatelessWidget {
         children: {
           for (final segment in segments)
             segment.value: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 7),
+              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 7),
               child: Text(
                 segment.label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: nativeTextStyle(
                   platform: platform,
-                  size: 12,
+                  size: 11,
                   weight: FontWeight.w500,
                   color: colors.foreground,
                 ),
