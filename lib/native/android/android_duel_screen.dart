@@ -135,13 +135,11 @@ class _AndroidDuelScreenState extends State<AndroidDuelScreen> {
           ),
           RadioGroup<int>(
             groupValue: _selectedIndex,
-            onChanged: _selectedIndex == null
-                ? (value) {
-                    if (value != null) {
-                      _select(value);
-                    }
-                  }
-                : null,
+            onChanged: (value) {
+              if (_selectedIndex == null && value != null) {
+                _select(value);
+              }
+            },
             child: Column(
               children: [
                 for (var index = 0;

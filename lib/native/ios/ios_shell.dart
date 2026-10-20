@@ -14,8 +14,8 @@ class IosShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return cupertino.CupertinoTabScaffold(
-      tabBar: const cupertino.CupertinoTabBar(
-        items: [
+      tabBar: cupertino.CupertinoTabBar(
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(cupertino.CupertinoIcons.house),
             activeIcon: Icon(cupertino.CupertinoIcons.house_fill),
