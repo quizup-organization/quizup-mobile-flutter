@@ -129,7 +129,7 @@ class AdaptiveButton extends StatelessWidget {
                 : style.background,
             borderRadius: BorderRadius.circular(tokens.radii.button),
             minimumSize: Size(0, _height),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             pressedOpacity: 0.7,
             child: child,
           )
@@ -140,7 +140,7 @@ class AdaptiveButton extends StatelessWidget {
                 onPressed: enabled ? onPressed : null,
                 style: OutlinedButton.styleFrom(
                   minimumSize: Size(0, _height),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   foregroundColor: style.foreground,
                   side: variant == QuizupButtonVariant.outline
                       ? BorderSide(color: colors.border)
@@ -152,7 +152,7 @@ class AdaptiveButton extends StatelessWidget {
                 onPressed: enabled ? onPressed : null,
                 style: FilledButton.styleFrom(
                   minimumSize: Size(0, _height),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
                   backgroundColor: style.background,
                   foregroundColor: style.foreground,
                 ),

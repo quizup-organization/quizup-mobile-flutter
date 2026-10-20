@@ -127,7 +127,9 @@ class _DuelScreenState extends State<DuelScreen> {
           child: Row(
             children: [
               PressableScale(
-                onTap: _quit,
+                onTap: () {
+                  _quit();
+                },
                 semanticLabel: 'Quitter le duel',
                 child: Container(
                   width: 40,
