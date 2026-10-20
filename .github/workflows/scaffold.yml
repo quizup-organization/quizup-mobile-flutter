@@ -1,0 +1,50 @@
+name: Scaffold
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/scaffold.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Create project and migrate design systems
+        run: |
+          rm -rf /tmp/scaffold
+          flutter create \
+            --org fr.cnadjim \
+            --project-name quizup \
+            --platforms=android,ios,web \
+            /tmp/scaffold
+          cd /tmp/scaffold
+          flutter pub add material_ui cupertino_ui
+          dart fix --apply --code=migrate_design_widgets
+          rm -f test/widget_test.dart
+          flutter clean
+          rm -rf .idea
+          find . -name '*.iml' -delete
+          zip -r /tmp/flutter-scaffold.zip .
+          unzip -l /tmp/flutter-scaffold.zip | head -40
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flutter-scaffold
+          path: /tmp/flutter-scaffold.zip
+          retention-days: 7
